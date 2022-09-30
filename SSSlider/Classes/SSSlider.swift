@@ -310,13 +310,18 @@ public class SSSlider: UIView {
         guard let forcegroundView = forcegroundView else {
             return
         }
+
+        let horizontalValue = value * (forcegroundView.frame.size.width - 2 * forceBorderWidth - thickness) + forceBorderWidth + thickness / 2.0
+        let verticalValue = forcegroundView.frame.size.height - value * (forcegroundView.frame.size.height - 2 * forceBorderWidth - thickness) - forceBorderWidth - thickness / 2.0
+        let defaultValue = value * (forcegroundView.frame.size.height - 2 * forceBorderWidth - thickness) + forceBorderWidth + thickness / 2.0
+        
         let positionHandleView: CGFloat = {
             if isHorizontal {
-                return value * (forcegroundView.frame.size.width - 2 * forceBorderWidth - thickness) + forceBorderWidth + thickness / 2.0
+                return horizontalValue
             } else if isVerticalDown {
-                return forcegroundView.frame.size.height - value * (forcegroundView.frame.size.height - 2 * forceBorderWidth - thickness) - forceBorderWidth - thickness / 2.0
+                return verticalValue
             }
-            return value * (forcegroundView.frame.size.height - 2 * forceBorderWidth - thickness) + forceBorderWidth + thickness / 2.0
+            return defaultValue
         }()
         let sizeValueView: CGFloat = {
             if isVerticalDown {
